@@ -23,7 +23,7 @@ const products = [
         productTeaserCover: "https://www.fotohits.de/fileadmin/user_upload/sonyalpha7iv-1.jpg"
     },
     {
-        active: false,
+        active: true,
         id: 2,
         productName: "Atomos Shinobi 5&Prime;",
         prices: {
@@ -101,7 +101,36 @@ const products = [
         features: [
         ],
         productTeaserCover: "https://petapixel.com/assets/uploads/2022/09/Sonys-New-Crop-Sensor-FX30-is-an-Easy-Entry-into-its-Cinema-Line-1.jpg"
-    }
+    },
+    {
+        active: true,
+        id: 8,
+        productName: "DJI Osmo Pocket",
+        prices: {
+            perDay: 18,
+            perFullWeek: 100,
+        },
+        description: "Der DJI Osmo Pocket ist eine ultrakompakte 4K-Kamera mit integriertem 3-Achsen-Gimbal, die dir professionelle Videoaufnahmen in jeder Situation ermöglicht. Dank intelligentem Tracking, HDR-Video und zeitlupenfähigem 4K/60fps liefert er gestochen scharfe und butterweiche Aufnahmen – ideal für Vlogs, Reisen oder schnelle Action-Szenen.",
+        features: [
+            "Als Creator Combo"
+        ],
+        productTeaserCover: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/osmopocket3header.jpg"
+    },
+    {
+        active: true,
+        id: 9,
+        productName: "DJI MIC 2",
+        prices: {
+            perDay: 14,
+            perFullWeek: 90,
+        },
+        description: "Das DJI MIC 2 ist ein kompaktes und leistungsstarkes drahtloses Mikrofon, das perfekten Ton für Interviews, Vlogs oder Filmproduktionen liefert. Mit einer Reichweite von bis zu 250m, integrierter Geräuschunterdrückung und bis zu 14 Stunden Aufnahmezeit sorgt es für glasklaren, professionellen Sound – egal, wo du drehst.",
+        features: [
+            "Inkl. allem Zubehör"
+        ],
+        productTeaserCover: "https://www.flyingmachines.de/cdn/shop/files/971364-DJI-MIC-2-2-TX-1-RX-Charging-Case-5_600x600_c52bc918-3432-4e95-9883-e6419fee3731.jpg?v=1721898757&width=1214"
+    },
+
 ]
 
 
