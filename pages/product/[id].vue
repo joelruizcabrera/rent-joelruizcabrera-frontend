@@ -1,13 +1,13 @@
 <template>
   <div class="py-5 px-4 grid sm:grid-cols-2 grid-cols-1">
-    <div class="sm:pe-2 self-center">
+    <div class="sm:pe-2 self-center sm:before:bg-none before:bg-linear-to-t before:from-stone-950 before:to-transparent before:w-full before:absolute before:h-2/3 before:left-0 before:bottom-0 relative">
       <NuxtImg :src="product.getThumbnail()" class="w-full rounded-md"></NuxtImg>
     </div>
-    <div class="sm:ps-2 sm:py-0 py-3 self-center">
-      <h1 v-html="product.getName()" class="text-white font-black italic uppercase text-4xl sm:text-5xl md:text-6xl"></h1>
+    <div class="sm:ps-2 sm:py-0 py-3 self-center sm:-mt-0 -mt-17 z-2">
+      <h1 v-html="product.getName()" class="text-white font-black italic uppercase text-5xl md:text-6xl"></h1>
       <div
-          class="md:max-h-full h-max overflow-hidden md:before:bg-none before:bg-linear-to-t before:from-stone-950 before:to-transparent before:transition-all before:duration-300 before:ease duration-400 ease before:w-full before:absolute before:left-0 before:bottom-0 relative transition-all md:pb-0 pb-4"
-          :class="{'max-h-15 before:h-2/3': !openedDescription, 'max-h-full before:h-0': openedDescription}"
+          class="max-h-max overflow-hidden md:before:bg-none before:bg-linear-to-t before:from-stone-950 before:to-transparent before:transition-all before:duration-300 before:ease duration-400 ease-in-out before:w-full before:absolute before:left-0 before:bottom-0 relative transition-all md:pb-0 pb-4"
+          :class="{'h-15 before:h-2/3': !openedDescription, 'h-[300px] before:h-0': openedDescription}"
       >
         <button class="md:hidden flex mx-auto absolute w-full left-0 text-white z-2 -bottom-0.5 justify-center cursor-pointer pointer-events-all" @click="() => {openedDescription = (!openedDescription)}">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6" v-if="!openedDescription">
@@ -34,7 +34,7 @@
       <div class="flex flex-row items-end gap-x-4 animate__animated animate__fadeInUp anim-delay-9">
         <div class="flex flex-col">
           <span class="text-white text-md font-light leading-none">Gesamt für <span v-html="(datesCount === 1 ? 'einen Tag' : datesCount + ' Tage')"></span></span>
-          <span class="text-white text-4xl sm:text-5xl font-black italic leading-none" v-html="calculatedPrice().result.value + '€'"></span>
+          <span class="text-white text-4xl sm:text-5xl font-black italic leading-none flex" v-html="calculatedPrice().result.value + `€<span class='font-thin text-2xl self-start'>*</span>`"></span>
         </div>
         <div class="flex flex-row gap-x-1 items-center leading-none" v-if="calculatedPrice().result.value !== calculatedPrice().calcPerDay.value">
           <span class="text-neutral-500 text-sm line-through leading-none"
@@ -55,6 +55,19 @@
             </p>
           </div>
         </div>
+      </div>
+      <div class="flex flex-col md:max-w-[380px] w-full">
+        <button type="button"
+                class="mt-4 animate__animated animate__fadeInUp anim-delay-12 text-gray-900 bg-gradient-to-t inset-shadow-sm shadow-md font-black rounded-lg text-sm px-5 py-2.5 text-center mt-2 transition duration-300 ease-[cubic-bezier(0.87, 0, 0.03, 0.97)] w-full"
+                :class="{
+                    'from-yellow-300 via-yellow-400 to-yellow-600 inset-shadow-yellow-200 shadow-yellow-500/50 hover:cursor-pointer hover:shadow-lg hover:inset-shadow-lg focus:outline-none': product.isActive(),
+                    'from-stone-300 via-stone-400 to-stone-500 inset-shadow-stone-200 focus:ring-stone-300 shadow-stone-500/50': !product.isActive()
+                }"
+                @click="handleCart()"
+                :disabled="!product.isActive()"
+                v-text="(product.isActive() ? 'JETZT ANFRAGEN' : 'NICHT VERFÜGBAR')"
+        ></button>
+        <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-3 animate__animated animate__fadeInUp anim-delay-20">* Preise exkl. MwSt. und ohne Kaution</p>
       </div>
     </div>
   </div>
@@ -88,5 +101,10 @@ const calculatedPrice = () => {
   }
   const saved = ref(Math.abs(result.value - calcPerDay.value))
   return {result, calcPerDay, saved}
+}
+
+const handleCart = () => {
+  if (!product.isActive) return;
+  console.log("cart add")
 }
 </script>
