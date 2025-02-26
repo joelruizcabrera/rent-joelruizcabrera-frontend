@@ -20,7 +20,7 @@
         <p v-html="product.getDescription()" class="text-neutral-400 font-thin text-sm my-2 leading-[1.2]"></p>
       </div>
       <StockDisplay :active="product.isActive()"></StockDisplay>
-      <Datepicker class="mt-2" ref="datepicker" @datecount="datesCount"></Datepicker>
+      <Datepicker class="mt-2" ref="datepicker"></Datepicker>
       <div class="flex flex-row pb-3 py-2">
         <span class="bg-yellow-800 text-yellow-300 text-sm font-bold me-2 px-3 py-1 rounded-sm animate__animated animate__fadeInUp anim-delay-3">
           <i v-text="product.getPrices().perDay"></i>€
@@ -66,22 +66,25 @@ const route = useRoute();
 const product = new Product(route.params.id)
 let openedDescription = ref(false)
 
-const datesCount = 1
+const datesCount = ref(1)
 
-watch(datesCount, (newDays, oldDays) => {
-  console.log(newDays, oldDays)
+useNuxtApp().hooks.hook('datecount:hook', (count: number) => {
+  if (count >= 1) {
+    datesCount.value = count
+  }
 })
+
 
 const calculatedPrice = () => {
   const result = ref(product.getPrices().perDay)
-  const calcPerDay = ref(Math.abs(datesCount * product.getPrices().perDay))
-  if(datesCount >= 7) {
-    let fullDayPrices = Math.abs((datesCount % 7) * product.getPrices().perDay)
-    let fullWeekPrices = Math.abs(((datesCount - (datesCount % 7)) / 7) * product.getPrices().perFullWeek)
+  const calcPerDay = ref(Math.abs(datesCount.value * product.getPrices().perDay))
+  if(datesCount.value >= 7) {
+    let fullDayPrices = Math.abs((datesCount.value % 7) * product.getPrices().perDay)
+    let fullWeekPrices = Math.abs(((datesCount.value - (datesCount.value % 7)) / 7) * product.getPrices().perFullWeek)
 
     result.value = Math.abs(fullDayPrices + fullWeekPrices)
   } else {
-    result.value = Math.abs(datesCount * product.getPrices().perDay)
+    result.value = Math.abs(datesCount.value * product.getPrices().perDay)
   }
   const saved = ref(Math.abs(result.value - calcPerDay.value))
   return {result, calcPerDay, saved}

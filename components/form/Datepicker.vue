@@ -227,19 +227,26 @@ const handleDayClick = (selectedDay) => {
   }
 }
 
-const emit = defineEmits(['datecount'])
+const tempCount = ref(1)
 
 const updateInput = () => {
   if (selectedStartDate.value && selectedEndDate.value) {
     const oneDay = 24 * 60 * 60 * 1000;
-    emit('datecount', Math.round(Math.abs((new Date(selectedStartDate.value) - new Date(selectedEndDate.value)) / oneDay)))
+    handleCountHook(Math.round(Math.abs((new Date(selectedStartDate.value) - new Date(selectedEndDate.value)) / oneDay)))
     return `${selectedStartDate.value} - ${selectedEndDate.value}`
   } else if (selectedStartDate.value) {
-    emit('datecount', 1)
+    handleCountHook(1)
     return selectedStartDate.value
   } else {
-    emit('datecount', 1)
+    handleCountHook(1)
     return ''
+  }
+}
+
+const handleCountHook = (c) => {
+  if (c !== tempCount.value) {
+    tempCount.value = c;
+    useNuxtApp().callHook("datecount:hook", tempCount.value)
   }
 }
 
