@@ -1,10 +1,8 @@
-import {PiniaPluginContext, StateTree, SubscriptionCallbackMutation} from "pinia";
-
 export default defineNuxtPlugin(({$pinia}) => {
     $pinia.use(StoragePiniaPlugin)
 })
 
-async function StoragePiniaPlugin(context: PiniaPluginContext) {
+async function StoragePiniaPlugin(context) {
     if (context.store.$id === "cart") {
         if (!process.server) {
             const initialCartFromStorage = localStorage.getItem("cart")
@@ -15,9 +13,9 @@ async function StoragePiniaPlugin(context: PiniaPluginContext) {
 
     console.log(context.store)
     let defaultPreCart = undefined
-    context.store.$subscribe((event: SubscriptionCallbackMutation<StateTree>) => {
-        if ((event.events as any).key === "products") {
-            localStorage.setItem("cart", JSON.stringify((event.events as any).newValue) || false)
+    context.store.$subscribe((event) => {
+        if ((event.events).key === "products") {
+            localStorage.setItem("cart", JSON.stringify((event.events).newValue) || false)
         }
     })
 }
