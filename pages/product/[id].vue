@@ -108,7 +108,7 @@ const addToCart = () => {
   if (!product.isActive) return;
   if (requestTime.value.from === undefined || requestTime.value.to === undefined) return;
   store.addToCart({
-    id: product.getId(),
+    id: (product.getId() ?? parseInt(route.params.id)),
     name: product.getName(),
     netPrice: calculatedPrice().result.value,
     requestRange: {

@@ -7,6 +7,7 @@ export const useCartStore = defineStore('cart', {
     }),
     actions: {
         addToCart(product: Object) {
+            console.log(product)
             let tempArray = this.products?.filter(x => x.id != product.id)
             tempArray.push(product)
             this.products = tempArray
