@@ -10,9 +10,9 @@ async function StoragePiniaPlugin(context) {
     }
 
     let defaultPreCart = undefined
-    context.store.$subscribe((event) => {
+    context.store.$subscribe((event, options) => {
         if (event.storeId === "cart") {
-            localStorage.setItem("cart", JSON.stringify((event.events).newValue) || false)
+            localStorage.setItem("cart", JSON.stringify(options.products) || false)
         }
     })
 }
