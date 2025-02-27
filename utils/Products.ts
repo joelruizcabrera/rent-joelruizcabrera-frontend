@@ -20,7 +20,10 @@ const products = [
         features: [
             "Inkl. Small Rig Cage"
         ],
-        productTeaserCover: "https://www.fotohits.de/fileadmin/user_upload/sonyalpha7iv-1.jpg"
+        productTeaserCover: "https://www.fotohits.de/fileadmin/user_upload/sonyalpha7iv-1.jpg",
+        category: [
+            'cameras'
+        ]
     },
     {
         active: true,
@@ -34,7 +37,10 @@ const products = [
         features: [
 
         ],
-        productTeaserCover: "https://www.film-tv-video.de/wp-content/uploads/2019/02/B_0219_Atomos_Shinobi_SD.jpg"
+        productTeaserCover: "https://www.film-tv-video.de/wp-content/uploads/2019/02/B_0219_Atomos_Shinobi_SD.jpg",
+        category: [
+            'diverse'
+        ]
     },
     {
         active: true,
@@ -48,7 +54,11 @@ const products = [
         features: [
             "Inkl. allem Zubehör"
         ],
-        productTeaserCover: "https://store.dji.bg/img/cms/ronin/dji-rs-3-pro/3.jpg"
+        productTeaserCover: "https://store.dji.bg/img/cms/ronin/dji-rs-3-pro/3.jpg",
+        category: [
+            'gimbal',
+            'diverse'
+        ]
     },
     {
         active: true,
@@ -61,7 +71,10 @@ const products = [
         description: "Das Sigma 20mm F1.4 DG HSM für Sony E-Mount ist ein lichtstarkes Weitwinkelobjektiv, ideal für Landschafts-, Astro- und Architekturaufnahmen. Mit seiner blendenstarken f/1.4 Öffnung liefert es gestochen scharfe Bilder mit wunderschönem Bokeh – selbst bei wenig Licht. Die hochwertige Verarbeitung und der schnelle HSM-Autofokus machen es zur perfekten Wahl für Profis und Kreative.",
         features: [
         ],
-        productTeaserCover: "https://www.sigmacanada.ca/cdn/shop/products/pphoto_20_14_a015_design_details_02_3000x2250.jpg?v=1628536451"
+        productTeaserCover: "https://www.sigmacanada.ca/cdn/shop/products/pphoto_20_14_a015_design_details_02_3000x2250.jpg?v=1628536451",
+        category: [
+            'lenses'
+        ]
     },
     {
         active: true,
@@ -74,7 +87,10 @@ const products = [
         description: "Das Sony SEL 85mm f/1.8 ist ein kompaktes, aber leistungsstarkes Objektiv für atemberaubende Porträts mit wunderschönem Bokeh. Die hohe Lichtstärke von f/1.8 sorgt für gestochen scharfe Motive und sanfte Hintergrundunschärfe. Dank schnellem und präzisem Autofokus eignet es sich perfekt für Fotoshootings und Videoproduktionen.",
         features: [
         ],
-        productTeaserCover: "https://dustinabbott.net/wp-content/gallery/sony-fe-85mm-f1-8-review/03-Clean.jpg"
+        productTeaserCover: "https://dustinabbott.net/wp-content/gallery/sony-fe-85mm-f1-8-review/03-Clean.jpg",
+        category: [
+            'lenses'
+        ]
     },
     {
         active: true,
@@ -87,7 +103,10 @@ const products = [
         description: "Das Sony SEL 35mm f/1.8 ist ein leichtes und kompaktes Festbrennweiten-Objektiv, das sich perfekt für Street-, Reportage- und Alltagsfotografie eignet. Mit seiner f/1.8 Blende liefert es auch bei schwierigen Lichtverhältnissen brillante Ergebnisse. Der schnelle Autofokus und die hohe Bildqualität machen es zu einem unverzichtbaren Begleiter für Kreative, die Wert auf Flexibilität legen.",
         features: [
         ],
-        productTeaserCover: "https://www.sony-asia.com/microsite/ILCE-7C/my/assets/images/products/SEL35F18F.jpg"
+        productTeaserCover: "https://www.sony-asia.com/microsite/ILCE-7C/my/assets/images/products/SEL35F18F.jpg",
+        category: [
+            'lenses'
+        ]
     },
     {
         active: false,
@@ -100,7 +119,10 @@ const products = [
         description: "Die Sony FX30 ist die perfekte Wahl für alle, die professionelle Cinema-Qualität in kompakter Form suchen! Mit ihrem Super-35mm-Sensor, 4K-Auflösung mit 10-Bit 4:2:2 Farbtiefe und Cine EI-Modus liefert sie atemberaubende Filmaufnahmen mit kinoreifen Farben und Dynamikumfang. Dank fortschrittlichem Autofokus, 5-Achsen-Stabilisierung und Dual Base ISO eignet sie sich ideal für kreative Filmprojekte, Dokumentationen oder Werbefilme.",
         features: [
         ],
-        productTeaserCover: "https://petapixel.com/assets/uploads/2022/09/Sonys-New-Crop-Sensor-FX30-is-an-Easy-Entry-into-its-Cinema-Line-1.jpg"
+        productTeaserCover: "https://petapixel.com/assets/uploads/2022/09/Sonys-New-Crop-Sensor-FX30-is-an-Easy-Entry-into-its-Cinema-Line-1.jpg",
+        category: [
+            'cameras'
+        ]
     },
     {
         active: true,
@@ -114,7 +136,11 @@ const products = [
         features: [
             "Als Creator Combo"
         ],
-        productTeaserCover: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/osmopocket3header.jpg"
+        productTeaserCover: "https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc3/osmopocket3header.jpg",
+        category: [
+            'gimbal',
+            'diverse'
+        ]
     },
     {
         active: true,
@@ -128,7 +154,10 @@ const products = [
         features: [
             "Inkl. allem Zubehör"
         ],
-        productTeaserCover: "https://www.flyingmachines.de/cdn/shop/files/971364-DJI-MIC-2-2-TX-1-RX-Charging-Case-5_600x600_c52bc918-3432-4e95-9883-e6419fee3731.jpg?v=1721898757&width=1214"
+        productTeaserCover: "https://www.flyingmachines.de/cdn/shop/files/971364-DJI-MIC-2-2-TX-1-RX-Charging-Case-5_600x600_c52bc918-3432-4e95-9883-e6419fee3731.jpg?v=1721898757&width=1214",
+        category: [
+            'diverse'
+        ]
     },
 
 ]

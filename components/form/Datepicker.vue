@@ -68,7 +68,7 @@
     <div
         v-if="isOpen"
         id="datepicker-container"
-        class="absolute shadow-xs flex w-full flex-col rounded-lg z-3 bg-linear-to-t from-neutral-950 via-neutral-950 to-neutral-900 px-4 py-6 sm:px-6 sm:py-[30px] outline-none inset-shadow-sm inset-shadow-neutral-950 border-neutral-900 border-2 shadow-neutral-900 shadow-lg"
+        class="absolute shadow-xs flex w-full flex-col rounded-lg z-3 bg-linear-to-t from-neutral-950 via-neutral-950 to-neutral-900 px-4 sm:py-6 py-4 sm:px-6 sm:py-[30px] outline-none inset-shadow-sm inset-shadow-neutral-950 border-neutral-900 border-2 shadow-neutral-900 shadow-lg"
     >
       <div class="flex items-center justify-between pb-2">
         <p id="currentMonth" class="text-base font-black uppercase italic text-white">{{ currentMonth }}</p>

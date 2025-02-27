@@ -23,5 +23,10 @@ export default defineNuxtConfig({
   app: {
     pageTransition: { name: 'page', mode: 'out-in' }
   },
-  components: ['~/components/', '~/components/form/']
+  components: ['~/components/', '~/components/form/'],
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth'
+    }
+  }
 })

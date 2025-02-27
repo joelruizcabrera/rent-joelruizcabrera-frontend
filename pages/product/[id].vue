@@ -1,9 +1,14 @@
 <template>
-  <div class="py-5 px-4 grid sm:grid-cols-2 grid-cols-1">
+  <div class="py-5 px-4 grid sm:grid-cols-2 grid-cols-1 relative">
+    <Transition>
+      <div class="absolute z-3 px-4 md:ps-2 w-screen md:w-1/2 right-0 anim-delay-4" v-if="openedAlert">
+        <Alert mode="success" :msg="`Das Produkt <b class='font-bold'>` + product.getName() + `</b> wurde zum Warenkorb hinzugefügt.`"></Alert>
+      </div>
+    </Transition>
     <div class="sm:pe-2 self-center sm:before:bg-none before:bg-linear-to-t before:from-stone-950 before:to-transparent before:w-full before:absolute before:h-2/3 before:left-0 before:bottom-0 relative">
       <NuxtImg :src="product.getThumbnail()" class="w-full rounded-md"></NuxtImg>
     </div>
-    <div class="sm:ps-2 sm:py-0 py-3 self-center sm:-mt-0 -mt-17 z-2">
+    <div class="sm:ps-2 sm:py-0 py-3 self-center sm:-mt-0 -mt-17 z-2 md:pt-8 sm:pt-12 pt-0">
       <h1 v-html="product.getName()" class="text-white font-black italic uppercase text-5xl md:text-6xl"></h1>
       <div
           class="max-h-max overflow-hidden md:before:bg-none before:bg-linear-to-t before:from-stone-950 before:to-transparent before:transition-all before:duration-300 before:ease duration-400 ease-in-out before:w-full before:absolute before:left-0 before:bottom-0 relative transition-all md:pb-0 pb-4"
@@ -84,6 +89,7 @@ const product = new Product(route.params.id)
 const request = new RequestController(product.getId())
 const store = useCartStore()
 let openedDescription = ref(false)
+const openedAlert = ref(false)
 
 const datesCount = ref(1)
 const requestTime = ref({})
@@ -110,6 +116,14 @@ const addToCart = () => {
       daysCount: requestTime.value.count
     }
   })
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+  openedAlert.value = true
+  setTimeout(() => {
+    openedAlert.value = false
+  }, 5000)
   console.log(requestTime)
   console.log(getProducts.value)
 }

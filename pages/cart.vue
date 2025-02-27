@@ -1,8 +1,8 @@
 <template>
-  <div class="px-4">
+  <div class="px-4 min-h-[50vh]">
     <h1 class="font-black italic text-white text-4xl py-4">ANFRAGE</h1>
-    <div class="grid md:grid-cols-2 grid-cols-1">
-      <div class="">
+    <div class="grid md:grid-cols-2 grid-cols-1 gap-x-6">
+      <div v-if="getProductLength > 0">
         <div class="text-white bg-linear-to-t from-neutral-950 to-neutral-900 p-3 rounded-lg inset-shadow-sm inset-shadow-neutral-900 border-neutral-800 border-2 shadow-neutral-900 shadow-lg group">
           <div class="flex flex-col">
             <div v-for="item in lineItems" :key="item.id" class="gap-x-2 w-full items-center flex flex-row justify-between py-2 first:pt-0 last:pb-0 border-b-neutral-700 last:border-b-0 border-b-1">
@@ -32,6 +32,12 @@
         </div>
         <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-1 animate__animated animate__fadeInUp anim-delay-20">* Preise exkl. MwSt. und Kaution</p>
       </div>
+      <div v-else>
+        <Alert mode="error" msg="Ihr Warenkorb ist leer."></Alert>
+      </div>
+      <div>
+        asd
+      </div>
     </div>
   </div>
 </template>
@@ -41,6 +47,7 @@ import {Product} from '~/utils/Products'
 import { useCartStore } from '~/stores/cart'
 const store = useCartStore()
 const lineItems = computed(() => store.getProducts)
+const getProductLength = computed(() => store.getCartLength)
 
 const productInfo = (id: number) => {
   return new Product(id)
