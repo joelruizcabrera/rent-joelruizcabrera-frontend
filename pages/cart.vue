@@ -55,7 +55,7 @@
         <div class="text-white bg-linear-to-t from-neutral-950 to-neutral-900 p-3 rounded-lg inset-shadow-sm inset-shadow-neutral-900 border-neutral-800 border-2 shadow-neutral-900 shadow-lg group sm:mt-0 mt-5">
           <RequestForm></RequestForm>
         </div>
-        <button @click="removeProduct(item.id)" class="mt-3 text-gray-900 font-black rounded-lg inset-shadow-sm shadow-md px-5 py-2.5 sm:w-max w-full bg-linear-to-t from-yellow-300 via-yellow-400 to-yellow-600 hover:from-lime-400 hover:via-lime-500 hover:to-lime-700 transition-all text-gray-900 hover:inset-shadow-lime-200 hover:shadow-lime-500/50 inset-shadow-yellow-200 shadow-yellow-500/50 hover:cursor-pointer hover:shadow-lg hover:inset-shadow-lg focus:outline-none transition hover:text-white">
+        <button @click="sendRequest()" class="mt-3 text-gray-900 font-black rounded-lg inset-shadow-sm shadow-md px-5 py-2.5 sm:w-max w-full bg-linear-to-t from-yellow-300 via-yellow-400 to-yellow-600 hover:from-lime-400 hover:via-lime-500 hover:to-lime-700 transition-all text-gray-900 hover:inset-shadow-lime-200 hover:shadow-lime-500/50 inset-shadow-yellow-200 shadow-yellow-500/50 hover:cursor-pointer hover:shadow-lg hover:inset-shadow-lg focus:outline-none transition hover:text-white">
           ANFRAGE ABSENDEN
         </button>
       </div>
@@ -79,6 +79,17 @@ store.$subscribe((state) => {
 
 const productInfo = (id: number) => {
   return new Product(id)
+}
+
+const sendRequest = () => {
+  if (getProductLength.value === 0) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+    return
+  }
+  // move forward => check validation form
 }
 
 const deleteCart = () => {
