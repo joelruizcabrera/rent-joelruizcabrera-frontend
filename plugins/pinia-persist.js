@@ -9,13 +9,9 @@ async function StoragePiniaPlugin(context) {
         context.store.$state.products = JSON.parse(initialCartFromStorage)
     }
 
-
-    console.log(context.store)
     let defaultPreCart = undefined
     context.store.$subscribe((event) => {
-        console.log(event)
-        console.log(event.events)
-        if ((event.events).key === "products") {
+        if (event.storeId === "cart") {
             localStorage.setItem("cart", JSON.stringify((event.events).newValue) || false)
         }
     })
