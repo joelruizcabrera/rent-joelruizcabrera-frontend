@@ -8,7 +8,9 @@ export const useCartStore = defineStore('cart', {
     actions: {
         addToCart(product: Object) {
             let tempArray = []
-            tempArray = this.$state.products.filter(x => x.id != product.id)
+            if (this.$state.products.length >= 1) {
+                tempArray = this.$state.products.filter(x => x.id != product.id)
+            }
             tempArray.push(product)
             this.$state.products = tempArray
             //localStorage.setItem('cart', JSON.stringify(this.products))
