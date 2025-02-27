@@ -83,7 +83,9 @@ const productInfo = (id: number) => {
 
 const deleteCart = () => {
   store.removeCart()
-  console.log("asd")
+  if (getProductLength.value === 0) {
+    cartIsFilled.value = false
+  }
 }
 
 const removeProduct = (id: number) => {
