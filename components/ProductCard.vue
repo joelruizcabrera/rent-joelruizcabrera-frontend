@@ -6,6 +6,7 @@
           :aria-disabled="!product.active"
           :class="{'pointer-events-none': !product.active}"
           class="before:inset-shadow-lg relative before:absolute before:w-full before:h-full before:left-0 before:top-0"
+          prefetch-on="interaction"
       >
         <NuxtImg
             :src="product.productTeaserCover"
@@ -37,6 +38,7 @@
             :to="(product.active ? '/product/' + product.id : '#')"
             :aria-disabled="!product.active"
             :class="{'pointer-events-none': !product.active}"
+            prefetch-on="interaction"
         >
           <button type="button"
                   class="text-gray-900 bg-gradient-to-t inset-shadow-sm shadow-md font-black rounded-lg text-sm px-5 py-2.5 text-center mt-2 transition duration-300 ease-[cubic-bezier(0.87, 0, 0.03, 0.97)] w-max"
