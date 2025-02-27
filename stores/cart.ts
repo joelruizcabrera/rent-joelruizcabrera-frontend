@@ -10,7 +10,7 @@ export const useCartStore = defineStore('cart', {
             let tempArray = []
             console.log(this.$state)
             console.log(this.$state.products)
-            console.log(state.products)
+            console.log(this.products)
             console.log(tempArray)
             if (this.$state.products.length >= 1) {
                 tempArray = this.$state.products.filter(x => x.id != product.id)
