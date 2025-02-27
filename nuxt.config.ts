@@ -11,8 +11,7 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-
-  modules: ['@nuxt/image', '@pinia/nuxt'],
+  modules: ['@nuxt/image', '@pinia/nuxt', '@vueuse/nuxt'],
 
   build: {
     transpile: ['xmlrpc', 'odoo-xmlrpc-ts']
@@ -21,7 +20,12 @@ export default defineNuxtConfig({
     strict: false
   },
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' }
+    pageTransition: { name: 'page', mode: 'out-in' },
+    head: {
+      script: [
+        {src: 'http://localhost:8098'}
+      ]
+    }
   },
   components: ['~/components/', '~/components/form/'],
   router: {

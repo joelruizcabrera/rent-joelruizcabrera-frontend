@@ -9,9 +9,11 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@heroicons/vue": "^2.2.0",
     "@nuxt/image": "^1.9.0",
     "@pinia/nuxt": "^0.10.1",
     "@tailwindcss/vite": "^4.0.8",
+    "@vueuse/nuxt": "^12.7.0",
     "animate.css": "^4.1.1",
     "mitt": "^3.0.1",
     "nuxt": "^3.15.4",

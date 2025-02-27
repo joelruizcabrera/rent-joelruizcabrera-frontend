@@ -91,6 +91,7 @@ const store = useCartStore()
 let openedDescription = ref(false)
 const openedAlert = ref(false)
 
+
 const datesCount = ref(1)
 const requestTime = ref({})
 
