@@ -264,6 +264,17 @@ const handleCountHook = (c) => {
 
 const toggleDatepicker = () => {
   isOpen.value = !isOpen.value
+  if(isOpen.value) {
+    window.scrollTo({
+      top: (datepickerRef.value.getBoundingClientRect().top - 50),
+      behavior: 'smooth'
+    })
+  } else {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 }
 
 const handleDocumentClick = (e) => {
