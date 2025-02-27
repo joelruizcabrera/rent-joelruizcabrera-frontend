@@ -18,7 +18,7 @@ export const useCartStore = defineStore('cart', {
     },
     getters: {
         getCartLength: (state) => {
-            return state.products.length
+            return state.products?.length
         },
         getProducts: (state) => state.products
     },
