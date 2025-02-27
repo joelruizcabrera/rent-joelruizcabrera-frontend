@@ -4,10 +4,8 @@ export default defineNuxtPlugin(({$pinia}) => {
 
 async function StoragePiniaPlugin(context) {
     if (context.store.$id === "cart") {
-        if (!process.server) {
-            const initialCartFromStorage = localStorage.getItem("cart")
-            context.store.$state.products = JSON.parse(initialCartFromStorage)
-        }
+        const initialCartFromStorage = localStorage.getItem("cart")
+        context.store.$state.products = JSON.parse(initialCartFromStorage)
     }
 
 
