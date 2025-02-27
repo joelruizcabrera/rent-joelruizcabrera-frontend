@@ -139,6 +139,9 @@ export class Product implements Product {
     constructor(id: number) {
         this.id = id
     }
+    getId = (): number => {
+        return products.find(x => x.id === parseInt(this.id)).id
+    }
     getName = (): string => {
         return products.find(x => x.id === parseInt(this.id)).productName
     }

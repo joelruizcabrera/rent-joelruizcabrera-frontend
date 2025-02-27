@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     ],
   },
 
-  modules: ['@nuxt/image'],
+  modules: ['@nuxt/image', '@pinia/nuxt'],
 
   build: {
     transpile: ['xmlrpc', 'odoo-xmlrpc-ts']

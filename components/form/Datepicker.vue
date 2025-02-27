@@ -175,13 +175,15 @@ const renderCalendar = () => {
     let className =
         'text-sm font-light flex h-[46px] w-[46px] items-center justify-center rounded-full mb-2 cursor-pointer hover:bg-neutral-800 hover:rounded-full transition-all border-1 border-transparent hover:border-white'
 
+    // IS FIRST DATE
     if (selectedStartDate.value && dayString === selectedStartDate.value) {
       className += ' text-white dark:text-white bg-neutral-800 border-white ' + (selectedEndDate.value !== null ? 'border-r-transparent rounded-r-none': '')
     }
+    // IS SECOND DATE
     if (selectedEndDate.value && dayString === selectedEndDate.value) {
       className += ' text-white dark:text-white rounded-l-none bg-neutral-800 border-white border-l-transparent'
     }
-    if (
+    if (  // IS INSIDE RANGE
         selectedStartDate.value &&
         selectedEndDate.value &&
         new Date(day) > new Date(selectedStartDate.value) &&
@@ -190,7 +192,7 @@ const renderCalendar = () => {
       className += ' bg-neutral-900 text-white rounded-none border-y-white hover:rounded-none hover:border-x-transparent'
     }
 
-    if (
+    if ( // IS OUR OF COMPLETE RANGE
         selectedStartDate.value &&
         new Date(day) < new Date(selectedStartDate.value) ||
         selectedEndDate.value &&
@@ -199,7 +201,7 @@ const renderCalendar = () => {
       className += ' text-neutral-800 hover:text-white'
     }
 
-    if (
+    if ( // IS DATES BEFORE BEGIN : BEFORE SECOND DATE
         selectedStartDate.value &&
         !selectedEndDate.value &&
         new Date(day) < new Date(selectedStartDate.value)
@@ -246,7 +248,11 @@ const updateInput = () => {
 const handleCountHook = (c) => {
   if (c !== tempCount.value) {
     tempCount.value = c;
-    useNuxtApp().callHook("datecount:hook", tempCount.value)
+    useNuxtApp().callHook("datecount:hook", {
+      count: tempCount.value,
+      from: selectedStartDate,
+      to: selectedEndDate,
+    })
   }
 }
 

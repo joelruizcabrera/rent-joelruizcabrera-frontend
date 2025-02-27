@@ -63,11 +63,11 @@
                     'from-yellow-300 via-yellow-400 to-yellow-600 inset-shadow-yellow-200 shadow-yellow-500/50 hover:cursor-pointer hover:shadow-lg hover:inset-shadow-lg focus:outline-none': product.isActive(),
                     'from-stone-300 via-stone-400 to-stone-500 inset-shadow-stone-200 focus:ring-stone-300 shadow-stone-500/50': !product.isActive()
                 }"
-                @click="handleCart()"
+                @click="addToCart"
                 :disabled="!product.isActive()"
                 v-text="(product.isActive() ? 'JETZT ANFRAGEN' : 'NICHT VERFÜGBAR')"
         ></button>
-        <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-3 animate__animated animate__fadeInUp anim-delay-20">* Preise exkl. MwSt. und ohne Kaution</p>
+        <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-3 animate__animated animate__fadeInUp anim-delay-20">* Preise exkl. MwSt. und Kaution</p>
       </div>
     </div>
   </div>
@@ -75,18 +75,44 @@
 
 <script lang="ts" setup>
 import {Product} from '~/utils/Products'
+import {RequestController} from "~/utils/RequestController";
+
+import { useCartStore } from '~/stores/cart'
+
 const route = useRoute();
 const product = new Product(route.params.id)
+const request = new RequestController(product.getId())
+const store = useCartStore()
 let openedDescription = ref(false)
 
 const datesCount = ref(1)
+const requestTime = ref({})
 
-useNuxtApp().hooks.hook('datecount:hook', (count: number) => {
-  if (count >= 1) {
-    datesCount.value = count
+useNuxtApp().hooks.hook('datecount:hook', (data) => {
+  if (data.count >= 1) {
+    datesCount.value = data.count
+    requestTime.value = data
   }
 })
 
+const getProducts = computed(() => store.products)
+
+const addToCart = () => {
+  if (!product.isActive) return;
+  if (requestTime.value.from === undefined || requestTime.value.to === undefined) return;
+  store.addToCart({
+    id: product.getId(),
+    name: product.getName(),
+    netPrice: calculatedPrice().result.value,
+    requestRange: {
+      fromStamp: requestTime.value.from,
+      toStamp: requestTime.value.to,
+      daysCount: requestTime.value.count
+    }
+  })
+  console.log(requestTime)
+  console.log(getProducts.value)
+}
 
 const calculatedPrice = () => {
   const result = ref(product.getPrices().perDay)
@@ -101,10 +127,5 @@ const calculatedPrice = () => {
   }
   const saved = ref(Math.abs(result.value - calcPerDay.value))
   return {result, calcPerDay, saved}
-}
-
-const handleCart = () => {
-  if (!product.isActive) return;
-  console.log("cart add")
 }
 </script>
