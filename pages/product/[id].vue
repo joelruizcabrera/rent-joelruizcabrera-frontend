@@ -72,7 +72,7 @@
                 :disabled="!product.isActive()"
                 v-text="(product.isActive() ? 'JETZT ANFRAGEN' : 'NICHT VERFÜGBAR')"
         ></button>
-        <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-3 animate__animated animate__fadeInUp anim-delay-20">* Preise exkl. MwSt. und Kaution</p>
+        <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-3 animate__animated animate__fadeInUp anim-delay-20">* Preise zzgl. MwSt. und Versicherung / Kaution</p>
       </div>
     </div>
   </div>
