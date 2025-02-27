@@ -125,8 +125,6 @@ const addToCart = () => {
   setTimeout(() => {
     openedAlert.value = false
   }, 5000)
-  console.log(requestTime)
-  console.log(getProducts.value)
 }
 
 const calculatedPrice = () => {

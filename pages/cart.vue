@@ -5,22 +5,22 @@
       <div v-if="cartIsFilled">
         <div class="text-white bg-linear-to-t from-neutral-950 to-neutral-900 p-3 rounded-lg inset-shadow-sm inset-shadow-neutral-900 border-neutral-800 border-2 shadow-neutral-900 shadow-lg group">
           <div class="flex flex-col">
-            <div v-for="item in lineItems" :key="item.id" class="gap-x-2 w-full items-center flex flex-row justify-between py-2 first:pt-0 last:pb-0 border-b-neutral-700 last:border-b-0 border-b-1">
+            <div v-for="item in lineItems ?? []" :key="item.id" class="gap-x-2 w-full items-center flex flex-row justify-between py-2 first:pt-0 last:pb-0 border-b-neutral-700 last:border-b-0 border-b-1">
               <div class="flex flex-row gap-x-4">
-                <NuxtImg :src="productInfo(item.id).getThumbnail()" class="w-15 h-15 shadow-lg object-cover rounded"></NuxtImg>
+                <NuxtImg :src="productInfo(item.id).getThumbnail() ?? ''" class="w-15 h-15 shadow-lg object-cover rounded"></NuxtImg>
                 <div class="flex flex-row items-center flex-wrap gap-x-6 gap-y-2">
                   <div class="flex flex-col">
                     <NuxtLink :to="'/product/' + item.id">
                       <p class="text-white text-md italic font-black hover:underline uppercase leading-none mb-1" v-html="item.name"></p>
                     </NuxtLink>
                     <div class="flex flex-row">
-                      <span class="text-white text-xs font-bold" v-for="feature in productInfo(item.id).getFeatures()" v-html="feature" :key="feature"></span>
+                      <span class="text-white text-xs font-bold" v-for="feature in productInfo(item.id).getFeatures() ?? []" v-html="feature" :key="feature"></span>
                     </div>
                     <span class="text-neutral-300 text-xs font-thin pt-0.5" v-html="'Zeitraum: ' + item.requestRange.fromStamp + ' - ' + item.requestRange.toStamp + ' (' + (item.requestRange.daysCount === 1 ? 'Ein Tag' : item.requestRange.daysCount + ' Tage') + ')'"></span>
                   </div>
                   <div class="flex flex-row gap-x-1 items-center">
                     <XMarkIcon class="size-4"></XMarkIcon>
-                    <span class="font-black text-xl leading-none" v-html="item.netPrice + '€'"></span>
+                    <span class="font-black text-xl leading-none" v-html="(item.netPrice ?? '') + '€'"></span>
                     <span class='font-thin text-xl self-start leading-none'>*</span>
                   </div>
                 </div>

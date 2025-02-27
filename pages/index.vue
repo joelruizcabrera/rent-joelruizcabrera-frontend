@@ -25,6 +25,4 @@ import {Products} from "~/utils/Products";
 
 const products = new Products().getAll()
 
-console.log(products[3])
-
 </script>
