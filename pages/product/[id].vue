@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-col md:max-w-[380px] w-full">
+      <div class="flex flex-col md:max-w-[380px] w-full pt-5">
         <button type="button"
                 class="mt-4 animate__animated animate__fadeInUp anim-delay-12 text-gray-900 bg-gradient-to-t inset-shadow-sm shadow-md font-black rounded-lg text-sm px-5 py-2.5 text-center mt-2 transition duration-300 ease-[cubic-bezier(0.87, 0, 0.03, 0.97)] w-full"
                 :class="{
@@ -72,7 +72,7 @@
                 :disabled="!product.isActive()"
                 v-text="(product.isActive() ? 'JETZT ANFRAGEN' : 'NICHT VERFÜGBAR')"
         ></button>
-        <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-3 animate__animated animate__fadeInUp anim-delay-20">* Preise exkl. MwSt. und Kaution</p>
+        <p class="self-center text-neutral-500 font-thin text-[.75rem] mt-3 animate__animated animate__fadeInUp anim-delay-20">* Preise zzgl. MwSt. und Versicherung / Kaution</p>
       </div>
     </div>
   </div>
