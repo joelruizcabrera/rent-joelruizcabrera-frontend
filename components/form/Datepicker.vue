@@ -75,7 +75,7 @@
         <div class="flex items-center justify-end space-x-[10px]">
               <span
                   id="prevMonth"
-                  class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[.5px] border-stroke bg-transparent text-white hover:text-yellow-400 transition"
+                  class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[1px] border-stroke bg-transparent text-white hover:text-yellow-400 transition"
                   @click="changeMonth(-1)"
               >
                 <svg
@@ -93,7 +93,7 @@
               </span>
           <span
               id="nextMonth"
-              class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[.5px] border-stroke bg-transparent text-white hover:text-yellow-400 transition"
+              class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[1px] border-stroke bg-transparent text-white hover:text-yellow-400 transition"
               @click="changeMonth(1)"
           >
                 <svg
@@ -113,7 +113,7 @@
       </div>
 
       <div class="grid grid-cols-7 text-sm font-bold uppercase text-white">
-        <div v-for="day in daysOfWeek" :key="day" class="mb-2 mt-4 flex h-[38px] w-[38px] items-center justify-center">
+        <div v-for="day in daysOfWeek" :key="day" class="mb-2 mt-4 flex h-[38px] w-auto items-center justify-center">
           {{ day }}
         </div>
 
@@ -130,13 +130,14 @@
 
       <div class="flex items-center justify-center space-x-3 pt-4 sm:space-x-4">
         <button
-            class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white"
+            class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white transition"
+            :class="{'border-transparent': !selectedStartDate}"
         >
           {{ selectedStartDate }}
         </button>
         <span class="font-thin text-white" v-if="selectedStartDate !== selectedEndDate && selectedEndDate !== null">bis</span>
         <button
-            class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white"
+            class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white transition"
             v-if="selectedStartDate !== selectedEndDate && selectedEndDate !== null"
         >
           {{ selectedEndDate }}
@@ -173,7 +174,7 @@ const renderCalendar = () => {
     const day = new Date(year, month, i)
     const dayString = day.toLocaleDateString('en-EN')
     let className =
-        'text-sm font-light flex h-[46px] w-[46px] items-center justify-center rounded-full mb-2 cursor-pointer hover:bg-neutral-800 hover:rounded-full transition-all border-1 border-transparent hover:border-white'
+        'text-sm font-light flex h-auto w-auto aspect-square items-center justify-center rounded-full mb-2 cursor-pointer hover:bg-neutral-800 hover:rounded-full transition-all border-1 border-transparent hover:border-white'
 
     // IS FIRST DATE
     if (selectedStartDate.value && dayString === selectedStartDate.value) {
@@ -225,6 +226,7 @@ const handleDayClick = (selectedDay) => {
       selectedStartDate.value = selectedDay
     } else {
       selectedEndDate.value = selectedDay
+      toggleDatepicker()
     }
   }
 }

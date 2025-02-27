@@ -68,5 +68,8 @@ const productInfo = (id: number) => {
 
 const removeProduct = (id: number) => {
   store.removeProduct(id)
+  if (getProductLength.value === 0) {
+    cartIsFilled.value = false
+  }
 }
 </script>
