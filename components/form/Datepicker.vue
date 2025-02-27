@@ -65,14 +65,15 @@
             </svg>
           </span>
     </div>
-    <div
-        v-if="isOpen"
-        id="datepicker-container"
-        class="absolute shadow-xs flex w-full flex-col rounded-lg z-3 bg-linear-to-t from-neutral-950 via-neutral-950 to-neutral-900 px-4 sm:py-6 py-4 sm:px-6 sm:py-[30px] outline-none inset-shadow-sm inset-shadow-neutral-950 border-neutral-900 border-2 shadow-neutral-900 shadow-lg"
-    >
-      <div class="flex items-center justify-between pb-2">
-        <p id="currentMonth" class="text-base font-black uppercase italic text-white">{{ currentMonth }}</p>
-        <div class="flex items-center justify-end space-x-[10px]">
+    <Transition name="datepicker-collapse">
+      <div
+          v-if="isOpen"
+          id="datepicker-container"
+          class="absolute shadow-xs flex w-full flex-col rounded-lg z-3 bg-linear-to-t from-neutral-950 via-neutral-950 to-neutral-900 px-4 sm:py-6 py-4 sm:px-6 sm:py-[30px] outline-none inset-shadow-sm inset-shadow-neutral-950 border-neutral-900 border-2 shadow-neutral-900 shadow-lg"
+      >
+        <div class="flex items-center justify-between pb-2">
+          <p id="currentMonth" class="text-base font-black uppercase italic text-white">{{ currentMonth }}</p>
+          <div class="flex items-center justify-end space-x-[10px]">
               <span
                   id="prevMonth"
                   class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[1px] border-stroke bg-transparent text-white hover:text-yellow-400 transition"
@@ -91,11 +92,11 @@
                   />
                 </svg>
               </span>
-          <span
-              id="nextMonth"
-              class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[1px] border-stroke bg-transparent text-white hover:text-yellow-400 transition"
-              @click="changeMonth(1)"
-          >
+            <span
+                id="nextMonth"
+                class="flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded border-[1px] border-stroke bg-transparent text-white hover:text-yellow-400 transition"
+                @click="changeMonth(1)"
+            >
                 <svg
                     width="16"
                     height="16"
@@ -109,41 +110,42 @@
                   />
                 </svg>
               </span>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-7 text-sm font-bold uppercase text-white">
-        <div v-for="day in daysOfWeek" :key="day" class="mb-2 mt-4 flex h-[38px] w-auto items-center justify-center">
-          {{ day }}
+          </div>
         </div>
 
-        <div
-            v-for="(day, index) in renderCalendar()"
-            :key="index"
-            :class="day.className"
-            :data-date="day.dayString"
-            @click="handleDayClick(day.dayString)"
-        >
-          {{ day.day }}
+        <div class="grid grid-cols-7 text-sm font-bold uppercase text-white">
+          <div v-for="day in daysOfWeek" :key="day" class="mb-2 mt-4 flex h-[38px] w-auto items-center justify-center">
+            {{ day }}
+          </div>
+
+          <div
+              v-for="(day, index) in renderCalendar()"
+              :key="index"
+              :class="day.className"
+              :data-date="day.dayString"
+              @click="handleDayClick(day.dayString)"
+          >
+            {{ day.day }}
+          </div>
+        </div>
+
+        <div class="flex items-center justify-center space-x-3 pt-4 sm:space-x-4">
+          <button
+              class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white transition"
+              :class="{'border-transparent': !selectedStartDate}"
+          >
+            {{ selectedStartDate }}
+          </button>
+          <span class="font-thin text-white" v-if="selectedStartDate !== selectedEndDate && selectedEndDate !== null">bis</span>
+          <button
+              class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white transition"
+              v-if="selectedStartDate !== selectedEndDate && selectedEndDate !== null"
+          >
+            {{ selectedEndDate }}
+          </button>
         </div>
       </div>
-
-      <div class="flex items-center justify-center space-x-3 pt-4 sm:space-x-4">
-        <button
-            class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white transition"
-            :class="{'border-transparent': !selectedStartDate}"
-        >
-          {{ selectedStartDate }}
-        </button>
-        <span class="font-thin text-white" v-if="selectedStartDate !== selectedEndDate && selectedEndDate !== null">bis</span>
-        <button
-            class="h-[37px] rounded border border-stroke bg-transparent px-5 text-sm font-light text-white transition"
-            v-if="selectedStartDate !== selectedEndDate && selectedEndDate !== null"
-        >
-          {{ selectedEndDate }}
-        </button>
-      </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
@@ -226,7 +228,9 @@ const handleDayClick = (selectedDay) => {
       selectedStartDate.value = selectedDay
     } else {
       selectedEndDate.value = selectedDay
-      toggleDatepicker()
+      setTimeout(() => {
+        toggleDatepicker()
+      }, 300)
     }
   }
 }
@@ -284,3 +288,17 @@ onUnmounted(() => {
   document.removeEventListener('click', handleDocumentClick)
 })
 </script>
+
+<style scoped>
+.datepicker-collapse-enter-active {
+  transition: all .3s ease-out;
+}
+.datepicker-collapse-leave-active {
+  transition: all 0.3s ease-in;
+}
+.datepicker-collapse-enter-from,
+.datepicker-collapse-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+</style>
