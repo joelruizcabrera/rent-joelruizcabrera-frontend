@@ -8,8 +8,8 @@ export const useCartStore = defineStore('cart', {
     actions: {
         addToCart(product: Object) {
             let tempArray = []
+            console.log(this.getProducts)
             tempArray = this.getProducts.filter(x => x.id != product.id)
-            console.log(tempArray)
             console.log(product)
             tempArray.push(product)
             this.products = tempArray
