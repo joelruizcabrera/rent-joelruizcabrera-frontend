@@ -2,6 +2,11 @@
   <div class="px-4 min-h-[50vh]">
     <Transition>
       <div v-if="!loadingRequest">
+        <Transition>
+          <div v-if="errorOnRequest">
+            <Alert mode="error" msg="Etwas ist schiefgelaufen, bitte versuchen Sie es erneut."></Alert>
+          </div>
+        </Transition>
         <h1 class="font-black italic text-white text-4xl py-4 leading-none">ANFRAGE ABSCHICKEN</h1>
         <div class="grid md:grid-cols-2 grid-cols-1 gap-x-6">
           <div>
@@ -97,6 +102,7 @@ import { RequestController } from '~/utils/RequestController'
 import { ref as $ref } from 'vue'
 
 const loadingRequest = ref(false)
+const errorOnRequest = ref(false)
 
 
 const store = useCartStore()
@@ -133,8 +139,10 @@ const handleRequest = async () => {
   // move forward => check validation form
   const result = await request.sendRequest(personalDetailsData.value.formRawData)
   if (result === true) {
-    loadingRequest.value = false
     await navigateTo('/order/success')
+  } else {
+    loadingRequest.value = false
+    errorOnRequest.value = true
   }
 }
 

@@ -80,13 +80,11 @@
 
 <script lang="ts" setup>
 import {Product} from '~/utils/Products'
-import {RequestController} from "~/utils/RequestController";
 
 import { useCartStore } from '~/stores/cart'
 
 const route = useRoute();
 const product = new Product(route.params.id)
-const request = new RequestController(product.getId())
 const store = useCartStore()
 let openedDescription = ref(false)
 const openedAlert = ref(false)
@@ -101,8 +99,6 @@ useNuxtApp().hooks.hook('datecount:hook', (data) => {
     requestTime.value = data
   }
 })
-
-const getProducts = computed(() => store.products)
 
 const addToCart = () => {
   if (!product.isActive) return;
