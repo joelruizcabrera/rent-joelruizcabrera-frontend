@@ -2,6 +2,7 @@ import {Product} from '~/utils/Products'
 import { v4 as uuidv4 } from 'uuid';
 import { useCartStore } from '~/stores/cart'
 import {LineItemInterface, RequestInterface} from '~/utils/Interfaces'
+import {SevdeskHandler} from "~/utils/SevdeskHandler";
 
 export class LineItem implements LineItemInterface {
     id;
@@ -26,6 +27,7 @@ export class Request implements RequestInterface {
         this.personalDetails = personalDetails
     }
     async create(host) {
+        const sevdesk = new SevdeskHandler(this.requestId, this.cartItems, this.personalDetails)
         try {
             const response: Response = await fetch(host, {
                 method: "POST",
@@ -37,8 +39,13 @@ export class Request implements RequestInterface {
                 })
             });
 
+            await sevdesk.createOrder()
+
             // Response handling.
-            const result = await response;
+            //const result = await response;
+            const result = {
+                status: 200
+            }
             console.log(result)
 
             // Reset the form values.
@@ -73,7 +80,7 @@ export class RequestController {
         const request = new Request(uuidv4(), this.formatCart(), personalDetails)
         if (await request.create(this.host)) {
             const store = useCartStore()
-            store.removeCart()
+            //store.removeCart()
             return true
         }
         /*

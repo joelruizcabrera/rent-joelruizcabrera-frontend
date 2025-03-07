@@ -127,7 +127,7 @@ useNuxtApp().hooks.hook('personalData:hook', (data) => {
 })
 
 const handleRequest = async () => {
-  loadingRequest.value = true
+  //loadingRequest.value = true
   const request = new RequestController()
   if (getProductLength.value === 0) {
     window.scrollTo({
@@ -137,13 +137,13 @@ const handleRequest = async () => {
     return
   }
   // move forward => check validation form
-  const result = await request.sendRequest(personalDetailsData.value.formRawData)
-  if (result === true) {
-    await navigateTo('/order/success')
+  await request.sendRequest(personalDetailsData.value.formRawData)
+  /*if (result === true) {
+    //await navigateTo('/order/success')
   } else {
-    loadingRequest.value = false
-    errorOnRequest.value = true
-  }
+    //loadingRequest.value = false
+    //errorOnRequest.value = true
+  }*/
 }
 
 const deleteCart = () => {
