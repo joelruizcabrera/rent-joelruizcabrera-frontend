@@ -34,6 +34,9 @@ export default defineNuxtConfig({
     }
   },
   security: {
+    headers: {
+      
+    },
     corsHandler: {
       origin: 'https://rent.joelruizcabrera.com',
       allowHeaders: '*',

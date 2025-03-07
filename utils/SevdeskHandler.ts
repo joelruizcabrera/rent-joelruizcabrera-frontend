@@ -27,7 +27,7 @@ export class SevdeskHandler {
         return {
             "Content-Type": "application/json",
             "Authorization": "a5afefb56f050d4f0719a29cc2b5b57fc",
-            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Origin": "https://rent.joelruizcabrera.com",
             "Accept": "application/json"
         }
     }
