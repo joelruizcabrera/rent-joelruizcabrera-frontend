@@ -1,4 +1,5 @@
 import {LineItemInterface} from "~/utils/Interfaces";
+import axios from "axios";
 
 export class SevdeskHandler {
     headers;
@@ -15,15 +16,20 @@ export class SevdeskHandler {
         this.host = "https://my.sevdesk.de/api/v1"
     }
 
-    setHeader(): HeadersInit {
-        const headers: HeadersInit = new Headers();
+    setHeader() {
+        /*const headers: HeadersInit = new Headers();
         headers.append("Content-Type", "application/json")
         headers.append("Authorization", "a5afefb56f050d4f0719a29cc2b5b57fc")
         headers.append("User-Agent", "SevdeskHandler/RentJoelRuizCabrera")
         headers.append("Access-Control-Allow-Origin", "*")
-        headers.append("Accept", "application/json")
+        headers.append("Accept", "application/json")*/
 
-        return headers
+        return {
+            "Content-Type": "application/json",
+            "Authorization": "a5afefb56f050d4f0719a29cc2b5b57fc",
+            "Access-Control-Allow-Origin": "*",
+            "Accept": "application/json"
+        }
     }
 
     async createOrder() {
@@ -34,7 +40,17 @@ export class SevdeskHandler {
     async handleContact(contact) {
         try {
             console.log(this.headers)
-            const response: Response = await fetch(this.host + "/Contact", {
+            const response = await axios.post(this.host + "/Contact", {
+                surename: contact.firstName,
+                familyname: contact.lastName,
+                category: {
+                    id: 3,
+                    objectName: "Category"
+                }
+            }, {
+                headers: this.setHeader()
+            })
+            /*const response: Response = await fetch(this.host + "/Contact", {
                 method: "POST",
                 headers: this.setHeader(),
                 body: JSON.stringify({
@@ -46,9 +62,8 @@ export class SevdeskHandler {
                     }
                 }),
                 credentials: "same-origin",
-                mode: "no-cors",
                 cache: 'no-cache',
-            })
+            })*/
             console.log(response)
         } catch (e) {
             console.log(e)

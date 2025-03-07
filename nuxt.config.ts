@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
-  modules: ['@nuxt/image', '@pinia/nuxt', '@vueuse/nuxt'],
+  modules: ['@nuxt/image', '@pinia/nuxt', '@vueuse/nuxt', 'nuxt-security'],
 
   build: {
     transpile: ['xmlrpc', 'odoo-xmlrpc-ts']
@@ -31,6 +31,14 @@ export default defineNuxtConfig({
   router: {
     options: {
       scrollBehaviorType: 'smooth'
+    }
+  },
+  security: {
+    corsHandler: {
+      origin: 'https://rent.joelruizcabrera.com',
+      allowHeaders: '*',
+      credentials: true,
+      exposeHeaders: '*'
     }
   }
 })
